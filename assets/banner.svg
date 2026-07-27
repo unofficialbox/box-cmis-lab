@@ -5,63 +5,84 @@
     <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
       <circle cx="2" cy="2" r="2" fill="#16233a"/>
     </pattern>
-    <linearGradient id="boxTop" x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id="blueLiq" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#8fbcf7"/>
-      <stop offset="1" stop-color="#6aa4f2"/>
+      <stop offset="1" stop-color="#0866d9"/>
     </linearGradient>
-    <linearGradient id="boxLeft" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2f7de0"/>
-      <stop offset="1" stop-color="#1f5fb8"/>
+    <linearGradient id="yellowLiq" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe08a"/>
+      <stop offset="1" stop-color="#f0b429"/>
     </linearGradient>
-    <linearGradient id="boxRight" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#0b52ab"/>
-      <stop offset="1" stop-color="#083b7d"/>
-    </linearGradient>
+    <clipPath id="erlClip">
+      <path d="M108 92 H144 V118 L172 188 Q176 202 160 210 H96 Q80 202 84 188 L108 118 Z"/>
+    </clipPath>
+    <clipPath id="floClip">
+      <circle cx="198" cy="166" r="24"/>
+    </clipPath>
+    <clipPath id="plateClip">
+      <rect x="54" y="46" width="208" height="208" rx="28"/>
+    </clipPath>
   </defs>
 
-  <!-- backdrop -->
   <rect width="1200" height="300" fill="#0b172a"/>
   <rect width="1200" height="300" fill="url(#dots)"/>
   <rect width="1200" height="6" fill="#0866d9"/>
 
-  <!-- ================= workbench mark ================= -->
-  <rect x="54" y="46" width="300" height="208" rx="28" fill="#101f35" stroke="#22304a" stroke-width="2"/>
+  <!-- square logo plate: 54..262 -->
+  <rect x="54" y="46" width="208" height="208" rx="28" fill="#101f35" stroke="#22304a" stroke-width="2"/>
 
-  <!-- isometric Box -->
-  <g stroke="#cfe0fb" stroke-width="1.6" stroke-linejoin="round">
-    <polygon points="204,78 258,108 204,138 150,108" fill="url(#boxTop)"/>
-    <polygon points="150,108 204,138 204,198 150,168" fill="url(#boxLeft)"/>
-    <polygon points="204,138 258,108 258,168 204,198" fill="url(#boxRight)"/>
-  </g>
-
-  <!-- folder tree / browse hierarchy -->
+  <g clip-path="url(#plateClip)">
+  <!-- Florence (back, inside square, behind tubes) -->
   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M204 198 V226" stroke="#9fb0c6" stroke-width="3"/>
-    <path d="M150 226 H258" stroke="#3f5678" stroke-width="3"/>
-    <path d="M150 226 V250" stroke="#5c9df2" stroke-width="3"/>
-    <path d="M204 226 V250" stroke="#5c9df2" stroke-width="3"/>
-    <path d="M258 226 V250" stroke="#5c9df2" stroke-width="3"/>
+    <path d="M198 116 V140" stroke="#cfe0fb" stroke-width="2.8"/>
+    <path d="M188 116 H208" stroke="#8fbcf7" stroke-width="3"/>
+    <circle cx="198" cy="166" r="24" fill="#0b172a" stroke="#cfe0fb" stroke-width="2.8"/>
+  </g>
+  <g clip-path="url(#floClip)">
+    <rect x="174" y="156" width="48" height="40" fill="url(#yellowLiq)"/>
+  </g>
+  <circle cx="188" cy="174" r="3" fill="#fffefa" opacity="0.4"/>
+  <circle cx="206" cy="182" r="2" fill="#fffefa" opacity="0.3"/>
 
-    <rect x="132" y="246" width="36" height="22" rx="4" fill="#0b172a" stroke="#8fbcf7" stroke-width="2.5"/>
-    <path d="M138 246 V240 H150 L156 246" fill="#0b172a" stroke="#8fbcf7" stroke-width="2.5"/>
+  <!-- Erlenmeyer (left) -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M104 84 H148" stroke="#8fbcf7" stroke-width="3.5"/>
+    <path d="M108 92 H144 V118 L172 188 Q176 202 160 210 H96 Q80 202 84 188 L108 118 Z"
+          fill="#0b172a" stroke="#cfe0fb" stroke-width="3"/>
+  </g>
+  <g clip-path="url(#erlClip)">
+    <rect x="82" y="152" width="92" height="64" fill="url(#blueLiq)"/>
+  </g>
+  <circle cx="120" cy="172" r="4.5" fill="#fffefa" opacity="0.38"/>
+  <circle cx="140" cy="186" r="3" fill="#fffefa" opacity="0.28"/>
 
-    <rect x="186" y="246" width="36" height="22" rx="4" fill="#0b172a" stroke="#5c9df2" stroke-width="2.5"/>
-    <path d="M192 246 V240 H204 L210 246" fill="#0b172a" stroke="#5c9df2" stroke-width="2.5"/>
+  <!-- tubes overlapping Erlenmeyer, covering Florence -->
+  <rect x="130" y="200" width="68" height="14" rx="3" fill="#3f5678"/>
+  <rect x="136" y="192" width="56" height="10" rx="2" fill="#55667c"/>
+  <rect x="142" y="128" width="10" height="72" rx="5" fill="#0b172a" stroke="#ff8a3d" stroke-width="2.2"/>
+  <rect x="144" y="164" width="6" height="28" rx="3" fill="#ff8a3d"/>
+  <rect x="158" y="120" width="10" height="80" rx="5" fill="#0b172a" stroke="#5c9df2" stroke-width="2.2"/>
+  <rect x="160" y="154" width="6" height="38" rx="3" fill="#5c9df2"/>
+  <rect x="174" y="132" width="10" height="68" rx="5" fill="#0b172a" stroke="#ff6658" stroke-width="2.2"/>
+  <rect x="176" y="168" width="6" height="24" rx="3" fill="#ff6658"/>
 
-    <rect x="240" y="246" width="36" height="22" rx="4" fill="#0b172a" stroke="#ff6658" stroke-width="2.5"/>
-    <line x1="248" y1="254" x2="268" y2="254" stroke="#ff6658" stroke-width="2"/>
-    <line x1="248" y1="260" x2="262" y2="260" stroke="#ff6658" stroke-width="2"/>
+  <!-- petri + dropper -->
+  <ellipse cx="142" y="232" rx="28" ry="8" fill="#0b52ab" stroke="#8fbcf7" stroke-width="2.2"/>
+  <ellipse cx="142" y="228" rx="20" ry="5" fill="#0866d9" opacity="0.9"/>
+  <path d="M160 220 L182 198" stroke="#9fb0c6" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M182 198 L194 186" stroke="#ff6658" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="158" cy="222" r="2.6" fill="#ff8a3d"/>
+
   </g>
 
-  <!-- ================= wordmark ================= -->
-  <text x="410" y="108" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+  <text x="300" y="108" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
         font-size="18" letter-spacing="3.5" fill="#5c9df2" font-weight="600">CMIS BROWSER BINDING &#183; WORKBENCH</text>
 
-  <text x="408" y="192" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+  <text x="298" y="192" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
         font-size="84" font-weight="800" letter-spacing="-2">
     <tspan fill="#fffefa">box-cmis-lab</tspan><tspan fill="#ff6658">.</tspan>
   </text>
 
-  <text x="411" y="238" font-family="Georgia, 'Times New Roman', serif"
+  <text x="301" y="238" font-family="Georgia, 'Times New Roman', serif"
         font-size="24" font-style="italic" fill="#9fb0c6">Connect &#183; Browse &#183; Query &#183; Inspect against Box CMIS.</text>
 </svg>

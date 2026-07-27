@@ -1,38 +1,66 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="box-cmis-lab">
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="box-cmis-lab">
   <title>box-cmis-lab</title>
   <defs>
-    <linearGradient id="labBoxTop" x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id="blueLiq" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#8fbcf7"/>
-      <stop offset="1" stop-color="#6aa4f2"/>
+      <stop offset="1" stop-color="#0866d9"/>
     </linearGradient>
-    <linearGradient id="labBoxLeft" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2f7de0"/>
-      <stop offset="1" stop-color="#1f5fb8"/>
+    <linearGradient id="yellowLiq" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe08a"/>
+      <stop offset="1" stop-color="#f0b429"/>
     </linearGradient>
-    <linearGradient id="labBoxRight" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#0b52ab"/>
-      <stop offset="1" stop-color="#083b7d"/>
-    </linearGradient>
+    <clipPath id="erlClip">
+      <path d="M28 40 H44 V56 L58 92 Q60 100 52 104 H20 Q12 100 14 92 L28 56 Z"/>
+    </clipPath>
+    <clipPath id="floClip">
+      <circle cx="78" cy="78" r="13"/>
+    </clipPath>
+    <clipPath id="plateClip">
+      <rect width="128" height="128" rx="28"/>
+    </clipPath>
   </defs>
 
-  <!-- mark plate -->
   <rect width="128" height="128" rx="28" fill="#0b172a"/>
   <rect x="0" y="0" width="128" height="6" fill="#0866d9"/>
 
-  <!-- isometric Box -->
-  <g stroke="#cfe0fb" stroke-width="1.4" stroke-linejoin="round">
-    <polygon points="64,28 92,44 64,60 36,44" fill="url(#labBoxTop)"/>
-    <polygon points="36,44 64,60 64,92 36,76" fill="url(#labBoxLeft)"/>
-    <polygon points="64,60 92,44 92,76 64,92" fill="url(#labBoxRight)"/>
+  <g clip-path="url(#plateClip)">
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M78 52 V64" stroke="#cfe0fb" stroke-width="2"/>
+    <path d="M72 52 H84" stroke="#8fbcf7" stroke-width="2.2"/>
+    <circle cx="78" cy="78" r="13" fill="#101f35" stroke="#cfe0fb" stroke-width="2"/>
   </g>
+  <g clip-path="url(#floClip)">
+    <rect x="65" y="72" width="26" height="22" fill="url(#yellowLiq)"/>
+  </g>
+  <circle cx="72" cy="82" r="1.5" fill="#fffefa" opacity="0.45"/>
+  <circle cx="84" cy="88" r="1" fill="#fffefa" opacity="0.35"/>
 
-  <!-- CMIS folder tree under the cube -->
-  <g fill="none" stroke="#5c9df2" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M48 102 H80"/>
-    <path d="M64 92 V102"/>
-    <path d="M48 102 V112"/>
-    <path d="M80 102 V112"/>
-    <rect x="42" y="110" width="12" height="8" rx="1.5" fill="#0b172a" stroke="#8fbcf7"/>
-    <rect x="74" y="110" width="12" height="8" rx="1.5" fill="#0b172a" stroke="#ff6658"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M26 36 H46" stroke="#8fbcf7" stroke-width="2.6"/>
+    <path d="M28 40 H44 V56 L58 92 Q60 100 52 104 H20 Q12 100 14 92 L28 56 Z"
+          fill="#101f35" stroke="#cfe0fb" stroke-width="2.3"/>
+  </g>
+  <g clip-path="url(#erlClip)">
+    <rect x="12" y="72" width="48" height="36" fill="url(#blueLiq)"/>
+  </g>
+  <circle cx="32" cy="84" r="2.2" fill="#fffefa" opacity="0.4"/>
+  <circle cx="42" cy="92" r="1.5" fill="#fffefa" opacity="0.3"/>
+
+  <rect x="46" y="96" width="34" height="7" rx="2" fill="#3f5678"/>
+  <rect x="50" y="92" width="26" height="5" rx="1.5" fill="#55667c"/>
+  <rect x="52" y="56" width="6" height="40" rx="3" fill="#101f35" stroke="#ff8a3d" stroke-width="1.6"/>
+  <rect x="53" y="76" width="4" height="16" rx="2" fill="#ff8a3d"/>
+  <rect x="61" y="52" width="6" height="44" rx="3" fill="#101f35" stroke="#5c9df2" stroke-width="1.6"/>
+  <rect x="62" y="72" width="4" height="20" rx="2" fill="#5c9df2"/>
+  <rect x="70" y="58" width="6" height="38" rx="3" fill="#101f35" stroke="#ff6658" stroke-width="1.6"/>
+  <rect x="71" y="78" width="4" height="14" rx="2" fill="#ff6658"/>
+
+  <ellipse cx="48" cy="114" rx="14" ry="4.5" fill="#0b52ab" stroke="#8fbcf7" stroke-width="1.6"/>
+  <ellipse cx="48" cy="112" rx="10" ry="2.8" fill="#0866d9" opacity="0.85"/>
+  <g stroke-linecap="round">
+    <path d="M62 106 L72 96" stroke="#9fb0c6" stroke-width="2"/>
+    <path d="M72 96 L78 90" stroke="#ff6658" stroke-width="3.2"/>
+    <circle cx="61" cy="107" r="1.3" fill="#ff8a3d"/>
+  </g>
   </g>
 </svg>
