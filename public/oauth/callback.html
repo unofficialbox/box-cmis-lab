@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Box CMIS Lab — OAuth callback</title>
+    <style>
+      body {
+        font-family: InterVariable, Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        margin: 2rem;
+        color: #222;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="status">Completing Box authorization…</p>
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var payload = {
+          type: "box-cmis-lab-oauth",
+          code: params.get("code"),
+          error: params.get("error"),
+          errorDescription: params.get("error_description"),
+          state: params.get("state"),
+        };
+        var status = document.getElementById("status");
+        if (window.opener) {
+          window.opener.postMessage(payload, window.location.origin);
+          status.textContent = payload.error
+            ? "Authorization failed. You can close this window."
+            : "Authorization complete. You can close this window.";
+          window.setTimeout(function () {
+            window.close();
+          }, 400);
+        } else {
+          status.textContent =
+            "No opener window found. Return to Box CMIS Lab and try Connect again.";
+        }
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+{
+  "name": "box-cmis-lab",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Modern CMIS Browser Binding workbench for the Box CMIS Connector",
+  "license": "MIT",
+  "author": "Kyle @ Unofficial Box",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unofficialbox/box-cmis-lab.git"
+  },
+  "bugs": {
+    "url": "https://github.com/unofficialbox/box-cmis-lab/issues"
+  },
+  "homepage": "https://github.com/unofficialbox/box-cmis-lab#readme",
+  "keywords": [
+    "cmis",
+    "box",
+    "browser-binding",
+    "workbench",
+    "box-cmis",
+    "typescript",
+    "bun",
+    "vite"
+  ],
+  "type": "module",
+  "packageManager": "bun@1.3.11",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.json --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@unofficialbox/box-open-elements": "^0.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "vitest": "^3.2.4"
+  }
+}
