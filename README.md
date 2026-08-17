@@ -16,6 +16,8 @@ UI chrome uses [`@unofficialbox/box-open-elements`](https://github.com/unofficia
 > **Not affiliated with, authorized, or endorsed by Box, Inc.** "Box" is a
 > trademark of Box, Inc. This is an independent community workbench.
 
+![Box CMIS Lab browsing a Box repository](assets/screenshot.png)
+
 ## Quick start
 
 ### 1. Prerequisites
@@ -95,7 +97,7 @@ src/
   cmis/        Browser Binding client + property helpers
   inspector/   Traffic log for the HTTP inspector
   session/     Connection and selection state
-assets/        Banner and logo
+assets/        Banner, logo, and app screenshot
 docs/          Workbench parity notes
 ```
 

@@ -130,14 +130,16 @@ export function createFolderTreePanel(): HTMLElement {
   root.className = "lab-pane lab-stack folder-tree-panel";
   root.heading = "Browse";
   root.innerHTML = `
-    <div class="browse-path-bar">
-      <box-text-field id="tree-path" class="browse-path-field" label="Path"></box-text-field>
-      <div class="browse-path-actions">
-        <box-button id="tree-go" label="Go" tone="primary"></box-button>
-        <box-button id="tree-up" label="Up"></box-button>
+    <div class="browse-path-chrome">
+      <div class="browse-path-bar">
+        <box-text-field id="tree-path" class="browse-path-field" label="Path"></box-text-field>
+        <div class="browse-path-actions">
+          <box-button id="tree-go" label="Go" tone="primary"></box-button>
+          <box-button id="tree-up" label="Up"></box-button>
+        </div>
       </div>
+      <p class="lab-muted" id="tree-meta"></p>
     </div>
-    <p class="lab-muted" id="tree-meta"></p>
     <div id="tree-empty"></div>
     <box-tree-grid id="folder-tree" label="Repository folders" hidden></box-tree-grid>
   `;
@@ -159,7 +161,9 @@ export function createFolderTreePanel(): HTMLElement {
   let selectedObjectId = "";
 
   const restoreExpanded = (): void => {
-    // box-tree-grid reseeds expansion to top-level only whenever items change.
+    // box-tree-grid expands every top-level branch whenever items change.
+    // Keep only folders the user (or navigation) actually opened.
+    treeInternals.expandedInternal.clear();
     for (const id of expandedFolders) {
       treeInternals.expandedInternal.add(id);
     }
@@ -212,11 +216,21 @@ export function createFolderTreePanel(): HTMLElement {
     return children;
   };
 
+  const hiddenRootId = (): string => session.getState().repositoryInfo?.rootFolderId ?? "";
+
+  const applyRootChildren = (children: TreeGridItem[]): void => {
+    setTreeItems(children);
+  };
+
   const ensureFolderLoaded = async (folderId: string): Promise<void> => {
     if (loadedFolders.has(folderId)) {
       return;
     }
     const children = await loadFolderChildren(folderId);
+    if (folderId === hiddenRootId()) {
+      applyRootChildren(children);
+      return;
+    }
     setTreeItems(replaceChildren(treeItems, folderId, children));
   };
 
@@ -248,29 +262,20 @@ export function createFolderTreePanel(): HTMLElement {
       if (token !== loadToken) {
         return;
       }
-      const rootItem: TreeGridItem = {
-        label:
-          getObjectName(rootFolder) ||
-          state.repositoryInfo?.repositoryName ||
-          "Root",
-        value: rootId,
-        cells: cellsFromObject(rootFolder),
-        children: [pendingChild(rootId)],
-      };
       loadedFolders = new Set();
-      expandedFolders = new Set([rootId]);
-      setTreeItems([rootItem]);
-      await ensureFolderLoaded(rootId);
+      expandedFolders = new Set();
+      const children = await loadFolderChildren(rootId);
       if (token !== loadToken) {
         return;
       }
+      applyRootChildren(children);
 
-      const selectedId = state.currentObject
-        ? getObjectId(state.currentObject)
-        : rootId;
-      applySelection(selectedId || rootId);
+      const selectedId = state.currentObject ? getObjectId(state.currentObject) : "";
+      if (selectedId && selectedId !== rootId) {
+        applySelection(selectedId);
+      }
       pathField.value = getPath(state.currentFolder) || getPath(rootFolder) || "/";
-      meta.textContent = `${findItem(treeItems, rootId)?.children?.length ?? 0} items in root`;
+      meta.textContent = `${treeItems.length} items`;
     } catch (error) {
       if (token !== loadToken) {
         return;
@@ -306,6 +311,14 @@ export function createFolderTreePanel(): HTMLElement {
           rightPane: "details",
         });
         pathField.value = getPath(object) || "/";
+        const rootId = hiddenRootId();
+        if (objectId === rootId) {
+          await ensureFolderLoaded(rootId);
+          applySelection("");
+          meta.textContent = `${treeItems.length} items`;
+          tree.scrollTop = scrollTop;
+          return;
+        }
         const ancestors = collectAncestorIds(treeItems, objectId) ?? [];
         for (const ancestorId of ancestors) {
           expandedFolders.add(ancestorId);

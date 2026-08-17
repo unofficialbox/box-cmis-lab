@@ -329,10 +329,30 @@ box-app-shell::part(frame) {
   height: 100%;
 }
 
-.folder-tree-panel {
+.lab-pane.folder-tree-panel {
+  overflow: hidden;
+}
+
+.folder-tree-panel::part(section) {
+  height: 100%;
+  min-height: 0;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.folder-tree-panel::part(body) {
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
   display: grid;
-  grid-template-rows: auto auto auto 1fr;
+  grid-template-rows: auto auto minmax(0, 1fr);
   gap: 0.75rem;
+}
+
+.browse-path-chrome {
+  display: grid;
+  gap: 0.75rem;
+  min-width: 0;
+  background: var(--surface-card);
 }
 
 /*
@@ -445,6 +465,10 @@ box-app-shell::part(frame) {
   overflow: auto;
   background: transparent;
   border: none;
+}
+
+.lab-browse-split::part(primary) {
+  overflow: hidden;
 }
 
 .lab-pane {
